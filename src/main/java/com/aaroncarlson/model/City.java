@@ -14,15 +14,21 @@ public class City extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @NotBlank(message = "Name is required")
     @Column(unique = true)
     private String name;
     @JsonIgnore
-    @OneToMany(mappedBy = "departureCity")
+    @OneToMany(mappedBy = "departureCity",
+            fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            orphanRemoval = false)
     private Set<Flight> departureFlights = new HashSet<>();
     @JsonIgnore
-    @OneToMany(mappedBy = "arrivalCity")
+    @OneToMany(mappedBy = "arrivalCity",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = false)
     private Set<Flight> arrivalFlights = new HashSet<>();
 
     public City() {
@@ -32,11 +38,11 @@ public class City extends DateAudit {
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

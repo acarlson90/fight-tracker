@@ -3,6 +3,7 @@ package com.aaroncarlson.service;
 import com.aaroncarlson.model.City;
 import com.aaroncarlson.model.Flight;
 import com.aaroncarlson.util.AppConstants;
+import com.aaroncarlson.util.TestConstants;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TransactionalTest {
+public class TransactionalServiceTest {
 
     @Autowired
     private FlightService flightService;
@@ -43,7 +44,7 @@ public class TransactionalTest {
         final City sanFrancisco = cityService.getCityByName(TestConstants.SAN_FRANCISCO);
         final City barcelona = cityService.getCityByName(TestConstants.BARCELONA);
 
-        flightService.createFlight(new Flight(sanFrancisco, barcelona, TestConstants.NOW));
+        flightService.createFlight(new Flight(450, sanFrancisco, barcelona, TestConstants.NOW));
 
         assertThat(flightService.getAllFlights(Integer.parseInt(AppConstants.DEFAULT_PAGE_NUMBER),
                 Integer.parseInt(AppConstants.DEFAULT_PAGE_SIZE)).getContent()).hasSize(1);
@@ -66,7 +67,7 @@ public class TransactionalTest {
         final City barcelona = cityService.getCityByName(TestConstants.BARCELONA);
 
         try {
-            flightService.createFlight(new Flight(barcelona, barcelona, TestConstants.NOW));
+            flightService.createFlight(new Flight(500, barcelona, barcelona, TestConstants.NOW));
         } catch (Exception exception) {
 
         }
