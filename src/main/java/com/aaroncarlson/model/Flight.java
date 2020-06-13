@@ -12,7 +12,9 @@ public class Flight extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+    @NotNull
+    private double price;
     @ManyToOne
     @NotNull(message = "Departing City is required")
     private City departureCity;
@@ -20,23 +22,32 @@ public class Flight extends DateAudit {
     @NotNull(message = "Arriving City is required")
     private City arrivalCity;
     @NotNull(message = "Departure Time is required")
-    private LocalDateTime departureTime;
+    private LocalDateTime time;
 
     public Flight() {
     }
 
-    public Flight(City departureCity, City arrivalCity, LocalDateTime departureTime) {
+    public Flight(double price, City departureCity, City arrivalCity, LocalDateTime time) {
+        this.price = price;
         this.departureCity = departureCity;
         this.arrivalCity = arrivalCity;
-        this.departureTime = departureTime;
+        this.time = time;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public City getDepartureCity() {
@@ -55,12 +66,12 @@ public class Flight extends DateAudit {
         this.arrivalCity = arrivalCity;
     }
 
-    public LocalDateTime getDepartureTime() {
-        return departureTime;
+    public LocalDateTime getTime() {
+        return time;
     }
 
-    public void setDepartureTime(LocalDateTime departureTime) {
-        this.departureTime = departureTime;
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 
     @Override
@@ -69,7 +80,7 @@ public class Flight extends DateAudit {
                 "id=" + id +
                 ", departureCity=" + departureCity +
                 ", arrivalCity=" + arrivalCity +
-                ", departureTime=" + departureTime +
+                ", time=" + time +
                 '}';
     }
 
@@ -81,15 +92,16 @@ public class Flight extends DateAudit {
         }
         /* Check if object is an instance of City or not
            "null instance [type]" asl return false */
-        if (!(object instanceof City)) {
+        if (!(object instanceof Flight)) {
             return false;
         }
         /* Typecast of Object to City so that we can compare
            data members */
         Flight flight = (Flight)object;
-        return flight.getArrivalCity().equals(this.arrivalCity) &&
+        return flight.getPrice() == this.price &&
+                flight.getArrivalCity().equals(this.arrivalCity) &&
                 flight.getDepartureCity().equals(this.departureCity)&&
-                flight.getDepartureTime().equals(this.departureTime);
+                flight.getTime().equals(this.time);
     }
 
 }

@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FlightService extends PagedResponseService {
@@ -44,10 +43,10 @@ public class FlightService extends PagedResponseService {
         return getFlightByDepartureAndArrivalCities(departureCity, arrivalCity);
     }
 
-    public Flight getFlightByDepartureAndArrivalCities(final City departureCity, final City arrivalCity) {
+    private Flight getFlightByDepartureAndArrivalCities(final City departureCity, final City arrivalCity) {
         return flightRepository.findByDepartureCityAndArrivalCity(departureCity, arrivalCity).orElseThrow(
                 () -> new ResourceNotFoundException("Flight", "Departure OR Arrival City",
-                        "Departure City: '" + departureCity.getName() + "' and Arrival City: '" + arrivalCity.getName() + "'"));
+                        "Departure City: '" + departureCity.getName() + "', Arrival City: '" + arrivalCity.getName() + "'"));
     }
 
     public PagedResponse<Flight> getAllFlights(final int page, final int size) {
@@ -77,7 +76,7 @@ public class FlightService extends PagedResponseService {
          * Intentionally SAVING flight BEFORE checking if arrival and departure cities are identical to demonstrate
          * that @Transactional roles back the DB
          */
-        Flight returnFlight = flightRepository.save(new Flight(persistedDepartureCity, persistedArrivalCity, flight.getDepartureTime()));
+        Flight returnFlight = flightRepository.save(new Flight(400, persistedDepartureCity, persistedArrivalCity, flight.getTime()));
 
         if (persistedDepartureCity.equals(persistedArrivalCity)) {
             throw new BadRequestException("Flight departure and arrival city cannot be the same");
@@ -104,8 +103,8 @@ public class FlightService extends PagedResponseService {
             persistedFlight.setArrivalCity(persistedArrivalCity);
         }
 
-        if (!persistedFlight.getDepartureTime().equals(flight.getDepartureTime())) {
-            persistedFlight.setDepartureTime(flight.getDepartureTime());
+        if (!persistedFlight.getTime().equals(flight.getTime())) {
+            persistedFlight.setTime(flight.getTime());
         }
 
         return flightRepository.save(persistedFlight);
