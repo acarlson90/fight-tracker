@@ -1,6 +1,7 @@
 package com.aaroncarlson.model;
 
 import com.aaroncarlson.model.audit.DateAudit;
+import com.aaroncarlson.model.audit.UserDateAudit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "city")
-public class City extends DateAudit {
+public class City extends UserDateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

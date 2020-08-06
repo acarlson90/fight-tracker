@@ -1,6 +1,6 @@
 package com.aaroncarlson.model;
 
-import com.aaroncarlson.model.audit.DateAudit;
+import com.aaroncarlson.model.audit.UserDateAudit;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "flight")
-public class Flight extends DateAudit {
+public class Flight extends UserDateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

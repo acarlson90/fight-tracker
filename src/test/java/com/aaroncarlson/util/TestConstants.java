@@ -4,6 +4,16 @@ import java.time.LocalDateTime;
 
 public interface TestConstants {
 
+    String AARON_CARLSON = "Aaron Carlson";
+    String SYDNEY_MACBAIN = "Sydney MacBain";
+    String DAISY_CARLSON = "Daisy Carlson";
+    String ACARLSON = "acarlson";
+    String SMACBAIN  = "smacbain";
+    String DCARLSON = "dcarlson";
+    String AARON_EMAIL = "acarlson@test.com";
+    String SYDNEY_EMAIL = "smacbain@test.com";
+    String DAISY_EMAIL = "dcarlson@test.com";
+    String PASSWORD = "password";
     String SAN_FRANCISCO = "San Francisco";
     String BARCELONA = "Barcelona";
     String BERKELEY = "Berkeley";

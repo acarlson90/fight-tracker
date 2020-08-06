@@ -2,6 +2,9 @@ package com.aaroncarlson.util;
 
 public interface AppConstants {
 
+    String AUTHORIZATION = "Authorization";
+    String BEARER = "Bearer";
+    String SPACE = " ";
     String DEFAULT_PAGE_NUMBER = "0";
     String DEFAULT_PAGE_SIZE = "30";
     String CREATED_AT = "createdAt";

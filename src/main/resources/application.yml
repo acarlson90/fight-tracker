@@ -1,3 +1,6 @@
+app:
+  jwtSecret: JWTSuperSecretKey
+  jwtExpirationInMs: 604800000
 spring:
   # Datasource
   datasource:
@@ -8,6 +11,13 @@ spring:
     console:
       enabled: true
   # JPA
+  jpa:
+    show-sql: true
+logging:
+  level:
+    org:
+      hibernate:
+        type: DEBUG
 #  jpa:
 #    show-sql: true
 #    properties:
