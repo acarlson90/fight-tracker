@@ -11,6 +11,7 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.time.Instant;
 
+// AuditingEntityListener - automatically populates createdAt & updatedAt values when an entity is persisted
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(

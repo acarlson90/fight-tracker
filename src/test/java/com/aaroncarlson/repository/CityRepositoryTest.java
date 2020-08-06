@@ -27,7 +27,7 @@ public class CityRepositoryTest {
     private City sanDiego;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         sanFrancisco = cityRepository.save(new City(TestConstants.SAN_FRANCISCO));
         walnutCreek = cityRepository.save(new City(TestConstants.WALNUT_CREEK));
         oakland = cityRepository.save(new City(TestConstants.OAKLAND));
@@ -127,7 +127,7 @@ public class CityRepositoryTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void cleanup() throws Exception {
         cityRepository.deleteAll();
     }
 

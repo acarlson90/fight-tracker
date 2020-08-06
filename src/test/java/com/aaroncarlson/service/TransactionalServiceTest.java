@@ -77,7 +77,7 @@ public class TransactionalServiceTest {
     }
 
     @After
-    public void teardown() {
+    public void cleanup() {
         flightService.deleteAllFlights();
         cityService.deleteAllCities();
     }

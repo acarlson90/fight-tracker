@@ -176,7 +176,7 @@ public class FlightRepositoryTest {
     }
 
     @After
-    public void tearDown() {
+    public void cleanup() {
         cityRepository.deleteAll();
         flightRepository.deleteAll();
     }
